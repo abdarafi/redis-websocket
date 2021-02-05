@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - "6376:6379"
+    volumes:
+      - /home/ubuntu/notif-services/redis:/data
+  ws:
+    build: websocket/
+    restart: always
+    ports:
+      - "3000:3000"
+
+networks:
+    default:
+        driver: bridge
+        ipam:
+          config:
+              - subnet: 172.16.66.0/24
